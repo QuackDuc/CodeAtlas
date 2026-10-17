@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeAtlas — UI/UX Prototype</title>
+  <meta name="description" content="CodeAtlas UI/UX clickable prototype for college project presentation. Understand your codebase." />
+
+  <!-- Google Fonts: Inter and JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- =====================================================================
+       SCREEN 1 — LOGIN
+       ===================================================================== -->
+  <div id="screen-login">
+    <div class="login-card">
+      <div class="login-brand">
+        <div class="brand-icon">CA</div>
+        <div class="brand-title">CODEATLAS</div>
+        <div class="login-tagline">Understand your codebase.</div>
+      </div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label" for="login-email">Email</label>
+          <input 
+            type="email" 
+            id="login-email" 
+            class="form-input" 
+            placeholder="developer@college.edu" 
+            value="demo@codeatlas.dev" 
+            required 
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="login-password">Password</label>
+          <input 
+            type="password" 
+            id="login-password" 
+            class="form-input" 
+            placeholder="••••••••••••" 
+            value="prototype" 
+            required 
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 6px;">
+          Sign In
+        </button>
+
+        <div class="login-divider">
+          <span>OR</span>
+        </div>
+
+        <button type="button" class="btn btn-secondary" style="width: 100%;" onclick="app.navigateTo('dashboard')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+          </svg>
+          Continue with GitHub
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       MAIN PROTOTYPE SHELL (SCREENS 2, 3, 4)
+       ===================================================================== -->
+  <div id="app-shell" style="display: none;">
+    <!-- LEFT SIDEBAR: Contains ONLY Dashboard, Codebase Map, AI Assistant + Bottom items -->
+    <aside class="sidebar">
+      <div class="sidebar-brand" onclick="app.navigateTo('dashboard')">
+        <div class="brand-icon" style="margin-bottom: 0; width: 26px; height: 26px; font-size: 12px;">CA</div>
+        <span class="brand-title" style="font-size: 15px;">CODEATLAS</span>
+      </div>
+
+      <!-- EXACTLY 3 NAVIGATION ITEMS -->
+      <nav class="sidebar-nav">
+        <div class="nav-item active" data-screen="dashboard" onclick="app.navigateTo('dashboard')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+          </span>
+          <span>Dashboard</span>
+        </div>
+
+        <div class="nav-item" data-screen="map" onclick="app.navigateTo('map')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          </span>
+          <span>Codebase Map</span>
+        </div>
+
+        <div class="nav-item ai-item" data-screen="ai" onclick="app.navigateTo('ai')">
+          <span class="nav-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-ai)" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>
+          </span>
+          <span>AI Assistant</span>
+        </div>
+      </nav>
+
+      <!-- AT THE BOTTOM: Prototype & Logout -->
+      <div class="sidebar-footer">
+        <div class="prototype-footer-indicator">
+          <span style="font-size: 11px; color: var(--text-secondary); font-weight: 500;">Status</span>
+          <span class="prototype-tag">Prototype</span>
+        </div>
+
+        <button class="btn btn-secondary btn-sm" style="width: 100%;" onclick="app.navigateTo('login')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN VIEWPORT -->
+    <div class="main-viewport">
+      <!-- Top Context Bar -->
+      <header class="top-bar">
+        <div class="repo-context-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          <span style="color: var(--text-secondary);">Repository:</span>
+          <strong class="font-mono" style="color: var(--text-primary);">CodeAtlas Demo</strong>
+        </div>
+
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span>Analysis Complete</span>
+        </div>
+      </header>
+
+      <!-- CONTENT STAGE (Contains only 3 Screens: Dashboard, Map, AI) -->
+      <main class="content-area">
+
+        <!-- ===================================================================
+             SCREEN 2 — DASHBOARD (PRIMARY FOCUS)
+             =================================================================== -->
+        <section id="screen-dashboard" class="screen-view active">
+          <!-- Dashboard Header -->
+          <div class="screen-header">
+            <div class="header-title-box">
+              <h1>Dashboard</h1>
+              <p class="subtitle">Understand your repository at a glance.</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn btn-primary btn-sm" onclick="app.navigateTo('map')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                Open Codebase Map
+              </button>
+            </div>
+          </div>
+
+          <!-- Metric Cards (MOCK VALUES) -->
+          <div class="metric-grid">
+            <div class="metric-card">
+              <div class="metric-value">124</div>
+              <div class="metric-label">Files</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-value">38</div>
+              <div class="metric-label">Classes</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-value">216</div>
+              <div class="metric-label">Functions</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-value">17</div>
+              <div class="metric-label">Modules</div>
+            </div>
+          </div>
+
+          <!-- Codebase Overview Graph (Centerpiece of Dashboard) -->
+          <div class="overview-graph-card">
+            <div class="overview-card-header">
+              <div>
+                <h2 style="font-size: 15px;">Codebase Overview</h2>
+                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">
+                  CodeAtlas understands how components in a repository are connected.
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="app.navigateTo('map')">
+                Open Codebase Map
+              </button>
+            </div>
+
+            <!-- SVG Graph Canvas -->
+            <div id="dashboard-graph-canvas" class="graph-canvas-container">
+              <!-- Rendered dynamically via app.js -->
+            </div>
+
+            <div class="overview-card-footer">
+              <span class="font-mono">5 key components mapped &bull; main.py &rarr; AuthService &rarr; UserRepository &rarr; Database</span>
+              <span style="font-size: 11px; color: var(--text-muted);">Interactive preview &bull; Click any node to explore</span>
+            </div>
+          </div>
+
+          <!-- AI Insight Card -->
+          <div class="ai-insight-card">
+            <div class="ai-insight-left">
+              <div class="ai-insight-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>
+              </div>
+              <div>
+                <div class="ai-insight-title">AI Insight</div>
+                <div class="ai-insight-text">
+                  "Authentication is primarily handled by <code class="font-mono" style="color: var(--text-primary); background: var(--bg-card-elevated); padding: 1px 4px; border-radius: 3px;">AuthService</code>, which interacts with <code class="font-mono" style="color: var(--text-primary); background: var(--bg-card-elevated); padding: 1px 4px; border-radius: 3px;">UserRepository</code> and <code class="font-mono" style="color: var(--text-primary); background: var(--bg-card-elevated); padding: 1px 4px; border-radius: 3px;">Database</code>."
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn-ai btn-sm" onclick="app.navigateTo('ai')">
+              Ask CodeAtlas AI
+            </button>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             SCREEN 3 — CODEBASE MAP (SHOWCASE SCREEN)
+             =================================================================== -->
+        <section id="screen-map" class="screen-view">
+          <!-- Screen Header -->
+          <div class="screen-header">
+            <div class="header-title-box">
+              <h1>Codebase Map</h1>
+              <p class="subtitle">Explore relationships between components.</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn btn-secondary btn-sm" onclick="app.navigateTo('dashboard')">
+                &larr; Back to Dashboard
+              </button>
+              <button class="btn btn-ai btn-sm" onclick="app.navigateTo('ai')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>
+                Ask AI
+              </button>
+            </div>
+          </div>
+
+          <!-- Codebase Map Workspace Layout: Graph + Right Info Panel -->
+          <div class="map-workspace-layout">
+            <!-- Left: Interactive Canvas -->
+            <div class="map-interactive-viewport" id="map-canvas-container">
+              <!-- Floating controls -->
+              <div class="map-controls-toolbar">
+                <button class="btn btn-icon" title="Zoom In" onclick="app.zoomMap(1.2)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </button>
+                <button class="btn btn-icon" title="Zoom Out" onclick="app.zoomMap(0.8)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </button>
+                <button class="btn btn-icon" title="Reset View" onclick="app.resetMapView()">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+                </button>
+              </div>
+
+              <!-- Floating Legend -->
+              <div class="map-legend">
+                <div class="legend-chip">
+                  <span class="legend-color-dot" style="background: #38BDF8;"></span>
+                  <span>File</span>
+                </div>
+                <div class="legend-chip">
+                  <span class="legend-color-dot" style="background: #818CF8;"></span>
+                  <span>Controller</span>
+                </div>
+                <div class="legend-chip">
+                  <span class="legend-color-dot" style="background: #A855F7;"></span>
+                  <span>Service</span>
+                </div>
+                <div class="legend-chip">
+                  <span class="legend-color-dot" style="background: #6366F1;"></span>
+                  <span>Repository</span>
+                </div>
+                <div class="legend-chip">
+                  <span class="legend-color-dot" style="background: #4F8CFF;"></span>
+                  <span>Database</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Information Panel (Updated dynamically upon node click) -->
+            <aside class="map-inspector-panel" id="map-inspector-container">
+              <!-- Static mock populated via app.js -->
+            </aside>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             SCREEN 4 — AI ASSISTANT
+             =================================================================== -->
+        <section id="screen-ai" class="screen-view">
+          <!-- Screen Header -->
+          <div class="screen-header">
+            <div class="header-title-box">
+              <h1 style="display: flex; align-items: center; gap: 8px;">
+                <span style="color: var(--accent-ai);">CodeAtlas AI</span>
+              </h1>
+              <p class="subtitle">Ask questions about your codebase.</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn btn-secondary btn-sm" onclick="app.navigateTo('dashboard')">
+                &larr; Back to Dashboard
+              </button>
+            </div>
+          </div>
+
+          <!-- AI Assistant Workspace Container -->
+          <div class="ai-workspace-layout">
+            <!-- Suggested Questions Bar -->
+            <div class="ai-suggestions-bar">
+              <span class="suggestions-label">Suggested:</span>
+              <button class="suggested-btn" onclick="app.askSuggestedQuestion(0)">
+                1. "How does authentication work?"
+              </button>
+              <button class="suggested-btn" onclick="app.askSuggestedQuestion(1)">
+                2. "Which components depend on Database?"
+              </button>
+              <button class="suggested-btn" onclick="app.askSuggestedQuestion(2)">
+                3. "Where is user registration implemented?"
+              </button>
+            </div>
+
+            <!-- Chat History Thread -->
+            <div class="ai-chat-thread" id="ai-chat-thread">
+              <!-- Initial mock conversation demonstrating user + AI output -->
+              <div class="chat-message user-msg">
+                <div class="chat-avatar user">U</div>
+                <div class="chat-body">How does authentication work?</div>
+              </div>
+
+              <div class="chat-message ai-msg">
+                <div class="chat-avatar ai">AI</div>
+                <div class="chat-body">
+                  <div>
+                    Authentication begins with <code class="font-mono" style="color: #38BDF8;">LoginController</code>, which calls <code class="font-mono" style="color: #A855F7;">AuthService</code>. <code class="font-mono" style="color: #A855F7;">AuthService</code> validates the user through <code class="font-mono" style="color: #6366F1;">UserRepository</code> and stores the session through <code class="font-mono" style="color: #4F8CFF;">Database</code>.
+                  </div>
+
+                  <div class="referenced-files-box">
+                    <div class="referenced-title">Referenced files:</div>
+                    <div class="referenced-files-list">
+                      <span class="ref-file-pill">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                        auth_service.py
+                      </span>
+                      <span class="ref-file-pill">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                        login.py
+                      </span>
+                      <span class="ref-file-pill">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                        user_model.py
+                      </span>
+                      <span class="ref-file-pill">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                        database.py
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chat Text Input Bar -->
+            <form id="ai-chat-form" class="ai-input-bar">
+              <input 
+                type="text" 
+                id="ai-user-input" 
+                class="ai-input-field" 
+                placeholder="Ask something about your codebase..." 
+                autocomplete="off"
+              />
+              <button type="submit" class="btn btn-ai">
+                <span>Send</span>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </button>
+            </form>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
